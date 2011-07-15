@@ -74,7 +74,7 @@ module ActsAsMongoTaggable
     end
     
     def tags_by_user(user)
-      model_tags.select{|tag| tag.user_ids.include? user.id}
+      model_tags.delete_if{|tag| !tag.user_ids.include? user.id}
     end
     
     # returns only the tag words, sorted by frequency; optionally can be limited
